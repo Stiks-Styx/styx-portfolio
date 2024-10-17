@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 class Responsive extends StatelessWidget {
   final Widget mobile;
-  final Widget? mobileLarge;
   final Widget? tablet;
   final Widget desktop;
 
@@ -13,30 +12,40 @@ class Responsive extends StatelessWidget {
     required this.mobile,
     this.tablet,
     required this.desktop,
-    this.mobileLarge,
   }) : super(key: key);
 
-  static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width <= 500;
+  // Screen sizes
+  static const int mobileBreakpoint = 500;
+  static const int tabletBreakpoint = 1024;
 
-  static bool isMobileLarge(BuildContext context) =>
-      MediaQuery.of(context).size.width <= 700;
+  // Screen size checks
+  static bool isMobile(BuildContext context) =>
+      MediaQuery.of(context).size.width < mobileBreakpoint;
 
   static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width < 1024;
+      MediaQuery.of(context).size.width >= mobileBreakpoint &&
+      MediaQuery.of(context).size.width < tabletBreakpoint;
 
   static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 1024;
+      MediaQuery.of(context).size.width >= tabletBreakpoint;
+
+  // Responsive component checks
+  static bool shouldShowMobileDrawer(BuildContext context) =>
+      MediaQuery.of(context).size.width < tabletBreakpoint;
+
+  static bool shouldShowMobileHeader(BuildContext context) =>
+      MediaQuery.of(context).size.width < tabletBreakpoint;
+
+  static bool shouldShowDesktopHeader(BuildContext context) =>
+      MediaQuery.of(context).size.width >= tabletBreakpoint;
 
   @override
   Widget build(BuildContext context) {
-    final Size _size = MediaQuery.of(context).size;
-    if (_size.width >= 1024) {
+    final Size size = MediaQuery.of(context).size;
+    if (size.width >= tabletBreakpoint) {
       return desktop;
-    } else if (_size.width >= 700 && tablet != null) {
+    } else if (size.width >= mobileBreakpoint && tablet != null) {
       return tablet!;
-    } else if (_size.width >= 500 && mobileLarge != null) {
-      return mobileLarge!;
     } else {
       return mobile;
     }

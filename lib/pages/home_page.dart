@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/constants/constants.dart';
-import 'package:portfolio/widgets/header_desktop.dart';
+import 'package:portfolio/styles/style.dart';
+import 'package:portfolio/widgets/site_logo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +18,26 @@ class _HomePageState extends State<HomePage> {
       body: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          HeaderDesktop(),
+          //HeaderDesktop(),
+          Container(
+            height: 50.0,
+            margin: EdgeInsets.fromLTRB(40, 5, 20, 5),
+            decoration: kHederDecoration,
+            child: Row(
+              children: [
+                SiteLogo(
+                  onTap: () {},
+                ),
+                const Spacer(),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.menu,
+                      color: bodyTextColor,
+                    )),
+              ],
+            ),
+          ),
           Container(
             height: 650,
             width: double.maxFinite,

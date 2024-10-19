@@ -16,7 +16,7 @@ class Responsive extends StatelessWidget {
 
   // Screen sizes
   static const int mobileBreakpoint = 500;
-  static const int tabletBreakpoint = 880;
+  static const int tabletBreakpoint = 860;
 
   // Screen size checks
   static bool isMobile(BuildContext context) =>

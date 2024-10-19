@@ -4,6 +4,9 @@ import 'package:portfolio/responsive.dart';
 import 'package:portfolio/widgets/header_mobile.dart';
 import 'package:portfolio/widgets/drawer_mobile.dart';
 import 'package:portfolio/widgets/header_desktop.dart';
+import 'package:portfolio/widgets/main_mobile.dart';
+import 'package:portfolio/widgets/main_desktop.dart';
+import 'package:portfolio/widgets/service_desktop.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             scrollDirection: Axis.vertical,
             children: [
               if (Responsive.shouldShowDesktopHeader(context))
-                HeaderDesktop()
+                const HeaderDesktop()
               else
                 HeaderMobile(
                   onLogoTap: () {},
@@ -36,41 +39,11 @@ class _HomePageState extends State<HomePage> {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
                 ),
-              Container(
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          'Hello, I am\nJohn Alex Alcazar',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: bodyTextColor,
-                          ),
-                        ),
-                        Text(
-                          'A Computer Science student at the University of LSPU',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w100,
-                            color: secondaryTextColor,
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Contact me'),
-                        )
-                      ],
-                    ),
-                    Image.asset('assets/images/bg.jpg'),
-                  ],
-                ),
-              ), //services
-              Container(
-                height: 650,
-                width: double.maxFinite,
-              ), //about
+              if (Responsive.shouldShowDesktopHeader(context))
+                const MainDesktop()
+              else
+                const MainMobile(), //HOME
+              const ServiceDesktop(), //about
               Container(
                 height: 650,
                 width: double.maxFinite,
